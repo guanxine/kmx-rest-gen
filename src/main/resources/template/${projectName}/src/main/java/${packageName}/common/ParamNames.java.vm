@@ -1,0 +1,8 @@
+package ${package}.common;
+
+/**
+ * Created by ${author} on ${datetime}.
+ */
+public class ParamNames {
+    public static final String CAS_SSO_ENABLE = "cas.sso.enable";
+}

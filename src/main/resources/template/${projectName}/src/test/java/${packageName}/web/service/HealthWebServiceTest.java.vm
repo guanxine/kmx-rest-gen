@@ -1,0 +1,40 @@
+package ${package}.web.service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import ${package}.entity.JsonResult;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.util.EntityUtils;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+
+import static org.junit.Assert.*;
+
+/**
+ * Created by guanxine on 18-4-2.
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+@ContextConfiguration(locations = {"classpath:test-context.xml"})
+public class HealthWebServiceTest {
+
+    private String baseUrl = "http://localhost:${servicePort}/${serviceName}";
+    @Test
+    public void check() throws Exception {
+        HttpResponse response = Request.Get(baseUrl + "/health")
+                .execute()
+                .returnResponse();
+        Assert.assertTrue(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK);
+        String content = EntityUtils.toString(response.getEntity());
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonResult jsonResult = objectMapper.readValue(content, JsonResult.class);
+        Assert.assertTrue(jsonResult.getCode() == 0);
+        Assert.assertTrue("The ${serviceName} service is healthy.".equals(jsonResult.getMessage()));
+    }
+
+}

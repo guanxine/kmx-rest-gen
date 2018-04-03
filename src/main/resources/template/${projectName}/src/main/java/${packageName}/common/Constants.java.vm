@@ -1,0 +1,8 @@
+package ${package}.common;
+
+/**
+ * Created by ${author} on ${datetime}.
+ */
+public class Constants {
+    public static final boolean CAS_SSO_ENABLE = true;
+}

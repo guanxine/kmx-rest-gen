@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="baseContext" class="${package}.common.BaseContext"></bean>
+
+    <!--<bean id="fileAuthProxyService" class="com.k2data.platform.file.rest.common.FileAuthProxyService">-->
+        <!--<constructor-arg name="fileContext" ref="fileContext"></constructor-arg>-->
+        <!--<constructor-arg name="authorizationService" ref="authorizationService"></constructor-arg>-->
+    <!--</bean>-->
+
+
+    <bean id="jsonProvider" class="com.k2data.web.common.MessageBodyWriterJSON"/>
+    <bean id="encodingLoggingInInterceptor" class="com.k2data.web.common.EncodingLoggingInInterceptor"/>
+    <bean id="htmlWebService" class="com.k2data.web.core.web.service.HtmlWebService"></bean>
+    <bean id="invokeFaultExceptionMapper"
+          class="${package}.common.BaseExceptionMapper"/>
+
+    <!-- rest service -->
+    <bean id="healthWebService" class="${package}.web.service.HealthWebService"></bean>
+</beans>
