@@ -1,7 +1,7 @@
-package ${package}.web.service;
+package com.k2data.platform.rest.demo.web.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ${package}.entity.JsonResult;
+import com.k2data.platform.rest.demo.entity.JsonResult;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.fluent.Request;
@@ -26,7 +26,7 @@ public class HealthWebServiceTest extends BaseWebServiceTest {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonResult jsonResult = objectMapper.readValue(content, JsonResult.class);
         Assert.assertTrue(jsonResult.getCode() == 0);
-        Assert.assertTrue("The ${serviceName} service is healthy.".equals(jsonResult.getMessage()));
+        Assert.assertTrue("The rest-demo service is healthy.".equals(jsonResult.getMessage()));
     }
 
 }

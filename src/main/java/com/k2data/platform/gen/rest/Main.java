@@ -41,83 +41,96 @@ author=guanxine
 
 
          */
-        System.out.print("project name: ");
-        if(scanner.hasNextInt()) {
-            System.out.println("num:" + scanner.nextInt() + ",");
+        String answer = null;
+
+        System.out.print("project name: (k2platform-rest-demo)");
+        if(!scanner.hasNextLine() || StringUtils.isEmpty(answer = scanner.nextLine())) {
+            answer = "k2platform-rest-demo";
+        }
+        conf.addProperty("projectName", answer);
+
+
+        System.out.print("service name: (rest-demo)");
+        answer = null;
+        if(!scanner.hasNextLine() || StringUtils.isEmpty(answer = scanner.nextLine())) {
+            answer = "rest-demo";
+        }
+        conf.addProperty("serviceName", answer);
+
+        System.out.print("service port: (8080)");
+        answer = null;
+        if(!scanner.hasNextLine() || StringUtils.isEmpty(answer = scanner.nextLine())) {
+            answer = "8080";
+        }
+        conf.addProperty("servicePort", Integer.parseInt(answer));
+
+
+        System.out.print("maven group id: (com.k2data.platform)");
+        answer = null;
+        if(!scanner.hasNextLine() || StringUtils.isEmpty(answer = scanner.nextLine())) {
+            answer = "com.k2data.platform";
+        }
+        conf.addProperty("mavenGroupId", answer);
+
+
+        System.out.print("maven artifact id: (k2platform-rest-demo)");
+        answer = null;
+        if(!scanner.hasNextLine() || StringUtils.isEmpty(answer = scanner.nextLine())) {
+            answer = "k2platform-rest-demo";
+        }
+        conf.addProperty("mavenArtifactId", answer);
+
+
+        System.out.print("maven version: (0.0.1-SNAPSHOT)");
+        answer = null;
+        if(!scanner.hasNextLine() || StringUtils.isEmpty(answer = scanner.nextLine())) {
+            answer = "0.0.1-SNAPSHOT";
+        }
+        conf.addProperty("mavenVersion", answer);
+
+
+        System.out.print("package: (com.k2data.platform.rest.demo)");
+        answer = null;
+        if(!scanner.hasNextLine() || StringUtils.isEmpty(answer = scanner.nextLine())) {
+           answer = "com.k2data.platform.rest.demo";
+        }
+        conf.addProperty("package", answer);
+
+        System.out.print("class: (Demo)");
+        answer = null;
+        if(!scanner.hasNextLine() || StringUtils.isEmpty(answer = scanner.nextLine())) {
+            answer = "Demo";
+        }
+        conf.addProperty("classNames", answer);
+
+        System.out.print("author: (guanxine)");
+        answer = null;
+        if(!scanner.hasNextLine() || StringUtils.isEmpty(answer = scanner.nextLine())) {
+            answer = "guanxine";
+        }
+        conf.addProperty("author", answer);
+
+        System.out.print("Is this ok? (yes)");
+
+        answer = null;
+        if(scanner.hasNextLine()
+                && StringUtils.isNotEmpty(answer = scanner.nextLine())
+                && (!"yes".equalsIgnoreCase(answer) || !"y".equalsIgnoreCase(answer))) {
+            System.err.println("Aborted.");
+            return;
         }
 
-//        String answerString = null;
-//        int answerInt = 8080;
-//
-//        System.out.print("project name: ");
-//        if(!scanner.hasNextLine() || StringUtils.isEmpty(answerString = scanner.nextLine())) {
-//            System.err.println("project name should not be empty!");
-//            return;
-//        }
-//        conf.addProperty("projectName", answerString);
-//
-//        System.out.print("service name: ");
-//        if(!scanner.hasNextLine() || StringUtils.isEmpty(answerString = scanner.nextLine())) {
-//            System.err.println("service name should not be empty!");
-//            return;
-//        }
-//        conf.addProperty("serviceName", answerString);
-//
-//
-//        System.out.print("service port: (8080)");
-//        if(!scanner.hasNextLine() || (answerInt = scanner.nextInt()) == null) {
-//            System.err.println("service port should not be empty!");
-//            return;
-//        }
-//        conf.addProperty("servicePort", answerInt);
-//
-//
-//        System.out.print("maven group id: ");
-//        if(!scanner.hasNextLine() || StringUtils.isEmpty(answerString = scanner.nextLine())) {
-//            System.err.println("maven group id should not be empty!");
-//            return;
-//        }
-//        conf.addProperty("mavenGroupId", answerString);
-//
-//
-//        System.out.print("maven artifact id: ");
-//        if(!scanner.hasNextLine() || StringUtils.isEmpty(answerString = scanner.nextLine())) {
-//            System.err.println("maven artifact id should not be empty!");
-//            return;
-//        }
-//        conf.addProperty("mavenArtifactId", answerString);
-//
-//
-//        System.out.print("maven version: ");
-//        if(!scanner.hasNextLine() || StringUtils.isEmpty(answerString = scanner.nextLine())) {
-//            System.err.println("maven version should not be empty!");
-//            return;
-//        }
-//        conf.addProperty("mavenVersion", answerString);
-//
-//
-//        System.out.print("package: ");
-//        if(!scanner.hasNextLine() || StringUtils.isEmpty(answerString = scanner.nextLine())) {
-//            System.err.println("package should not be empty!");
-//            return;
-//        }
-//        conf.addProperty("package", answerString);
-//
-//        System.out.print("author: ");
-//        if(!scanner.hasNextLine() || StringUtils.isEmpty(answerString = scanner.nextLine())) {
-//            System.err.println("author should not be empty!");
-//            return;
-//        }
-//        conf.addProperty("author", answerString);
+        System.out.println("Gen code to " +  System.getProperty("user.dir") + "/" + conf.getString("projectName"));
+        genCode(conf, System.getProperty("user.dir"));
     }
 
-    public static void genCode(Configuration config) throws IOException {
-        File file = new File("./demo");
-        file.createNewFile();
-        OutputStream outputStream = new FileOutputStream(file);
-        ZipOutputStream zip = new ZipOutputStream(outputStream);
-        GenRestUtils.generatorCode(zip, config);
-        IOUtils.closeQuietly(zip);
+    public static void genCode(Configuration config, String path) throws IOException {
+//        File file = new File("./demo");
+//        file.createNewFile();
+//        OutputStream outputStream = new FileOutputStream(file);
+//        ZipOutputStream zip = new ZipOutputStream(outputStream);
+        GenRestUtils.generatorCode(config, path);
+//        IOUtils.closeQuietly(outputStream);
     }
 
 

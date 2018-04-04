@@ -1,0 +1,24 @@
+package ${package}.service;
+
+import ${package}.entity.vo.${className}Vo;
+
+import java.util.Collection;
+import java.util.List;
+
+/**
+ * Created by guanxine on 18-4-4.
+ */
+public interface ${className}Service {
+
+    Integer save(${className}Vo vo);
+
+    void delete(int id);
+
+    ${className}Vo get(int id);
+
+    void update(int id, ${className}Vo vo);
+
+    long count();
+
+    List<${className}Vo> list(long offset, Long pageSize);
+}

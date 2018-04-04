@@ -2,19 +2,11 @@ package com.k2data.platform.gen.rest.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 /**
- * 日期处理
- * 
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2016年12月21日 下午12:53:33
+ * Created by guanxine on 18-4-4.
  */
 public class DateUtils {
-	/** 时间格式(yyyy-MM-dd) */
-	public final static String DATE_PATTERN = "yyyy-MM-dd";
-	/** 时间格式(yyyy-MM-dd HH:mm:ss) */
-	public final static String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+	public final static String DATE_PATTERN = "yy-MM-dd";
 	
 	public static String format(Date date) {
         return format(date, DATE_PATTERN);

@@ -20,10 +20,8 @@
         <jaxrs:serviceBeans>
             <ref bean="htmlWebService"/>
             <ref bean="healthWebService"/>
-            #foreach ($class in $classNames)
-            <ref bean="$class.toLowerCase()WebService"/>
-            #end
-        </jaxrs:serviceBeans>
+                        <ref bean="studentWebService"/>
+                    </jaxrs:serviceBeans>
         <jaxrs:outInterceptors>
             <bean class="org.apache.cxf.interceptor.LoggingOutInterceptor"></bean>
         </jaxrs:outInterceptors>

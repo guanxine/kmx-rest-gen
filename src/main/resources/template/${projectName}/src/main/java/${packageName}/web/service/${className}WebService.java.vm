@@ -1,0 +1,147 @@
+package ${package}.web.service;
+
+import ${package}.common.BaseContext;
+import ${package}.entity.JsonResult;
+import ${package}.entity.Page;
+import ${package}.entity.vo.${className}Vo;
+import ${package}.service.${className}Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.*;
+
+/**
+ * Created by guanxine on 18-4-2.
+ */
+@Path("/${lowerclass}s")
+@Produces(MediaType.APPLICATION_JSON)
+public class ${className}WebService {
+
+    private static Logger LOG = LoggerFactory.getLogger(${className}WebService.class);
+
+    @Autowired
+    private BaseContext baseContext;
+
+    @Autowired
+    private ${className}Service ${lowerclass}Service;
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response create(${className}Vo ${lowerclass}Vo) {
+        try {
+            // TODO: create
+            Integer id = ${lowerclass}Service.save(${lowerclass}Vo);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", id);
+            return Response.status(201).entity(new JsonResult(0, "Create ${lowerclass} successfully.", map)).build();
+        }
+        catch (Exception e) {
+
+            LOG.error("Error, create ${lowerclass}: ", e);
+            return Response.status(400).entity(new JsonResult(1, String.format("Error, Create ${lowerclass}: %s!", e.getMessage()))).build();
+        }
+    }
+
+    @DELETE
+    @Path("{id}")
+    public Response delete(@PathParam("id") int id) {
+        try {
+
+            // TODO: delete
+            ${lowerclass}Service.delete(id);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", id);
+            return Response.status(200).entity(new JsonResult(0, "Delete ${lowerclass} successfully.", map)).build();
+        }
+        catch (Exception e) {
+            LOG.error("Error, delete ${lowerclass}: ", e);
+            return Response.status(400).entity(new JsonResult(1, String.format("Error, Delete ${lowerclass}: %s!", e.getMessage()))).build();
+        }
+    }
+
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response update(@PathParam("id") int id, ${className}Vo ${lowerclass}Vo) {
+        try {
+
+            // TODO: update
+            ${lowerclass}Service.update(id, ${lowerclass}Vo);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", id);
+            return Response.status(200).entity(new JsonResult(0, "Update ${lowerclass} successfully.", map)).build();
+        }
+        catch (Exception e) {
+            LOG.error("Error, update ${lowerclass}: ", e);
+            return Response.status(400).entity(new JsonResult(1, String.format("Error, Update ${lowerclass}: %s!", e.getMessage()))).build();
+        }
+    }
+
+
+    @GET
+    @Path("{id}")
+    public Response get(@PathParam("id") int id) {
+        LOG.info("Try to get ${lowerclass} by id: " + id);
+
+        if(id < 0) {
+            return Response.status(400).entity(new JsonResult(1, String.format("Failed, ${lowerclass} id should be > 0, but actual value is '%s'.", id))).build();
+        }
+
+        try {
+            // TODO: get
+            ${className}Vo ${lowerclass}Vo = ${lowerclass}Service.get(id);
+
+            if(${lowerclass}Vo != null) {
+                return Response.status(200).entity(new JsonResult(0, "Get ${lowerclass} successfully.", ${lowerclass}Vo)).build();
+            }
+            else {
+                LOG.info("Failed, Not exist ${lowerclass} {}", id);
+                return Response.status(404).entity(new JsonResult(1, "Failed, Not exist ${lowerclass}: " + id + ".")).build();
+            }
+
+        }
+        catch (Exception e) {
+            LOG.error("Failed, can not get ${lowerclass} detail.", e);
+            return Response.status(400).entity(new JsonResult(1, String.format("Failed, can not get ${lowerclass} detail: %s!", e.getMessage()))).build();
+        }
+    }
+
+    @GET
+    @Path("")
+    public Response list(@QueryParam("pageNum") final Long page, @QueryParam("pageSize") Long pageSize, @Context HttpServletRequest request) {
+
+        try {
+            List<${className}Vo> results = null;
+            long offset = Page.getOffset(page, pageSize);
+
+            //TODO: get total
+            long total = ${lowerclass}Service.count();
+            if (offset < total && total > 0) {
+                if (pageSize < 1) {
+                    pageSize = Page.DEFAULT_PAGE_SIZE;
+                }
+                //TODO: get lists
+                results = ${lowerclass}Service.list(offset, pageSize);
+            }
+            else {
+                results = Collections.emptyList();
+            }
+
+            return Response.status(200).entity(new JsonResult(0, "Get ${lowerclass} list successfully.", new Page<>(results, page, pageSize, total))).build();
+        }
+        catch (Exception e) {
+            LOG.error("Error. Can not get ${lowerclass} lists: {}!", e);
+            return Response.status(400).entity(new JsonResult(1, String.format("Error. Can not get ${lowerclass} lists: %s!", e.getMessage()))).build();
+        }
+    }
+
+}

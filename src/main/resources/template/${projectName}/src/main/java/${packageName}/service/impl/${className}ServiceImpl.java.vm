@@ -1,0 +1,46 @@
+package ${package}.service.impl;
+
+import ${package}.entity.vo.${className}Vo;
+import ${package}.service.${className}Service;
+import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * Created by guanxine on 18-4-4.
+ */
+@Service
+public class ${className}ServiceImpl implements ${className}Service{
+    @Override
+    public Integer save(${className}Vo vo) {
+        return vo.getId();
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
+    public ${className}Vo get(int id) {
+        ${className}Vo vo = new ${className}Vo();
+        vo.setId(id);
+        return vo;
+    }
+
+    @Override
+    public void update(int id, ${className}Vo vo) {
+
+    }
+
+    @Override
+    public long count() {
+        return 0;
+    }
+
+    @Override
+    public List<${className}Vo> list(long offset, Long pageSize) {
+        return Collections.emptyList();
+    }
+}

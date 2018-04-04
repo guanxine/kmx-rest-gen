@@ -1,0 +1,20 @@
+package ${package}.entity.vo;
+
+/**
+ * Created by guanxine on 18-4-4.
+ */
+public class ${className}Vo{
+
+    private Integer id;
+
+    public ${className}Vo() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+}

@@ -3,7 +3,7 @@
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
-    <display-name>${projectName}</display-name>
+    <display-name>k2platform-rest-demo</display-name>
 
     <!--cas -->
     <listener>
@@ -13,7 +13,7 @@
     <!--initialize servlet with spring-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:${serviceName}-spring-context.xml</param-value>
+        <param-value>classpath*:rest-demo-spring-context.xml</param-value>
     </context-param>
     <listener>
         <listener-class>

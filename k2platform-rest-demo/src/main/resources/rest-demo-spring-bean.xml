@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="baseContext" class="${package}.common.BaseContext"></bean>
+    <bean id="baseContext" class="com.k2data.platform.rest.demo.common.BaseContext"></bean>
 
     <!--<bean id="fileAuthProxyService" class="com.k2data.platform.file.rest.common.FileAuthProxyService">-->
         <!--<constructor-arg name="fileContext" ref="fileContext"></constructor-arg>-->
@@ -16,11 +16,9 @@
     <bean id="encodingLoggingInInterceptor" class="com.k2data.web.common.EncodingLoggingInInterceptor"/>
     <bean id="htmlWebService" class="com.k2data.web.core.web.service.HtmlWebService"></bean>
     <bean id="invokeFaultExceptionMapper"
-          class="${package}.common.BaseExceptionMapper"/>
+          class="com.k2data.platform.rest.demo.common.BaseExceptionMapper"/>
 
     <!-- rest service -->
-    <bean id="healthWebService" class="${package}.web.service.HealthWebService"></bean>
-    #foreach ($class in $classNames)
-    <bean id="$class.toLowerCase()WebService" class="${package}.web.service.${class}WebService"></bean>
-    #end
-</beans>
+    <bean id="healthWebService" class="com.k2data.platform.rest.demo.web.service.HealthWebService"></bean>
+        <bean id="studentWebService" class="com.k2data.platform.rest.demo.web.service.StudentWebService"></bean>
+    </beans>
